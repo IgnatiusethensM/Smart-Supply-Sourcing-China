@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Registration</title>
+</head>
+<body>
+    <h1>Test Registration</h1>
+    
+    <form id="testRegForm">
+        <div>
+            <label>Username:</label>
+            <input type="text" id="username" value="testuser" required>
+        </div>
+        <div>
+            <label>Email:</label>
+            <input type="email" id="email" value="test@example.com" required>
+        </div>
+        <div>
+            <label>Password:</label>
+            <input type="password" id="password" value="password123" required>
+        </div>
+        <div>
+            <label>Role:</label>
+            <select id="role">
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+            </select>
+        </div>
+        <div id="adminGroup" style="display: none;">
+            <label>Admin Password:</label>
+            <input type="password" id="adminPassword" value="admin123secure!">
+        </div>
+        <button type="submit">Register</button>
+    </form>
+
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script>
+        const socket = io('http://localhost:5000');
+        
+        document.getElementById('role').addEventListener('change', function() {
+            const adminGroup = document.getElementById('adminGroup');
+            if (this.value === 'admin') {
+                adminGroup.style.display = 'block';
+            } else {
+                adminGroup.style.display = 'none';
+            }
+        });
+
+        document.getElementById('testRegForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
+            const adminPassword = document.getElementById('adminPassword').value;
+
+            const requestBody = { username, email, password, role };
+            
+            if (role === 'admin' && adminPassword) {
+                requestBody.adminPassword = adminPassword;
+            }
+
+            console.log('Sending registration request:', requestBody);
+
+            try {
+                const response = await fetch('http://localhost:5000/api/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+
+                console.log('Response status:', response.status);
+                console.log('Response headers:', [...response.headers.entries()]);
+
+                const data = await response.json();
+                console.log('Response data:', data);
+
+                if (response.ok) {
+                    alert('Registration successful! Token: ' + data.token.substring(0, 20) + '...');
+                } else {
+                    alert('Registration failed: ' + data.message);
+                }
+            } catch (error) {
+                console.error('Registration error:', error);
+                alert('Network error: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

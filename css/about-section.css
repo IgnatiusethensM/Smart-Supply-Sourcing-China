@@ -1,0 +1,82 @@
+/* About Us Section Modern Styles */
+.about-section {
+  max-width: 900px;
+  margin: 60px auto;
+  padding: 40px;
+  background-color: #ffffff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.about-section h1 {
+  font-size: 2.5em;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.about-section p.lead {
+  font-size: 1.2em;
+  color: #444;
+  margin-bottom: 30px;
+}
+
+.about-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 40px;
+}
+
+.about-section ul li {
+  font-size: 1.05em;
+  margin-bottom: 12px;
+  position: relative;
+  padding-left: 20px;
+}
+
+.about-section ul li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: #1e90ff;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.button-group a {
+  text-decoration: none;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-size: 1em;
+  transition: background 0.3s ease;
+}
+
+.btn-contact {
+  background-color: #1e90ff;
+  color: white;
+}
+
+.btn-contact:hover {
+  background-color: #0074cc;
+}
+
+.btn-products {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ccc;
+}
+
+.btn-products:hover {
+  background-color: #e6e6e6;
+}
+
+@media (max-width: 600px) {
+  .button-group {
+    flex-direction: column;
+    gap: 15px;
+  }
+}

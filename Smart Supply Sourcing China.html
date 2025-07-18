@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Supply Sourcing China - Professional Procurement Solutions</title>
+    <meta name="description" content="Premium sourcing platform for China-made products with smart procurement solutions and competitive pricing">
+    
+    <!-- CSS Links -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/about-section.css">
+</head>
+<body>
+    <!-- Animation background removed -->
+    <!-- Header/Navigation -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo" style="cursor:pointer;" onclick="window.location.href='Smart Supply Sourcing China.html'">
+                 <img src="c:\Users\A\Pictures\Company\SSSC logo.jpg" alt="Smart Supply Sourcing China Logo" class="logo-img">
+                 <h1>Smart Supply Sourcing China</h1>
+            </div>
+                <nav class="main-nav">
+                    <a href="#" class="nav-link">Home</a>
+                    <a href="products.html" class="nav-link">Products</a>
+                    <a href="#" class="nav-link" id="contactNavBtn">Contact</a>
+                </nav>
+                <div class="header-actions">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                    <button class="cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">3</span>
+                    </button>
+                    <button class="login-btn">Login</button>
+                    <button class="btn-primary" style="background:#f59e0b;color:#fff;margin-left:0.5rem;" onclick="window.location.href='admin.html'">Admin Dashboard</button>
+                    <button class="mobile-menu-btn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <!-- Contact Modal -->
+    <div id="contactModal" class="contact-modal" style="display:none;">
+        <div class="contact-modal-content">
+            <button class="contact-modal-close" id="closeContactModal" title="Close">&times;</button>
+            <h2>Contact Us</h2>
+            <div class="contact-modal-info">
+                <div class="contact-modal-item">
+                    <i class="fas fa-phone fa-2x"></i>
+                    <div>
+                        <span class="contact-label">Phone</span>
+                        <a href="tel:+8615012484113" class="contact-value">+8615012484113</a>
+                    </div>
+                </div>
+                <div class="contact-modal-item">
+                    <i class="fab fa-whatsapp fa-2x"></i>
+                    <div>
+                        <span class="contact-label">WhatsApp</span>
+                        <a href="https://wa.me/8615012484113" target="_blank" rel="noopener" class="contact-value">+8615012484113</a>
+                    </div>
+                </div>
+                <div class="contact-modal-item">
+                    <i class="fab fa-tiktok fa-2x"></i>
+                    <div>
+                        <span class="contact-label">TikTok</span>
+                        <a href="https://www.tiktok.com/@sourcing_china_kenya?_t=ZM-8xmDvC4rMXA&_r=1" target="_blank" rel="noopener" class="contact-value">@sourcing_china_kenya</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Modal -->
+    <div id="searchModal" class="search-modal" style="display:none;">
+        <div class="search-modal-content">
+            <button class="search-modal-close" id="closeSearchModal" title="Close">&times;</button>
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Search products, categories..." class="search-input">
+                <button class="search-submit-btn"><i class="fas fa-search"></i></button>
+            </div>
+            <div id="searchResults" class="search-results"></div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="cart-modal" style="display:none;">
+        <div class="cart-modal-content">
+            <button class="cart-modal-close" id="closeCartModal" title="Close">&times;</button>
+            <h2>Shopping Cart</h2>
+            <div id="cartItems" class="cart-items"></div>
+            <div class="cart-total">
+                <strong>Total: $<span id="cartTotal">0.00</span></strong>
+            </div>
+            <div class="cart-actions">
+            <button class="btn-primary" id="checkoutBtn">Proceed to Payment</button>
+            <button class="btn-secondary" id="clearCartBtn">Clear Cart</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu" style="display:none;">
+        <div class="mobile-menu-content">
+            <button class="mobile-menu-close" id="closeMobileMenu" title="Close">&times;</button>
+            <nav class="mobile-nav">
+            <a href="#" class="mobile-nav-link">Home</a>
+            <a href="products.html" class="mobile-nav-link">Products</a>
+            <a href="#" class="mobile-nav-link" id="mobileContactBtn">Contact</a>
+            </nav>
+            <div class="mobile-actions">
+                <button class="mobile-search-btn"><i class="fas fa-search"></i> Search</button>
+                <button class="mobile-cart-btn"><i class="fas fa-shopping-cart"></i> Cart (<span id="mobileCartCount">0</span>)</button>
+                <button class="mobile-login-btn">Login</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quote Request Modal -->
+    <div id="quoteModal" class="quote-modal" style="display:none;">
+        <div class="quote-modal-content">
+            <button class="quote-modal-close" id="closeQuoteModal" title="Close">&times;</button>
+            <h2>Request Quote</h2>
+            <form id="quoteForm" class="quote-form">
+                <div class="form-group">
+                    <label for="quoteName">Full Name *</label>
+                    <input type="text" id="quoteName" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="quoteEmail">Email *</label>
+                    <input type="email" id="quoteEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="quotePhone">Phone Number *</label>
+                    <input type="tel" id="quotePhone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="quoteCompany">Company Name</label>
+                    <input type="text" id="quoteCompany" name="company">
+                </div>
+                <div class="form-group">
+                    <label for="quoteProduct">Product Description *</label>
+                    <textarea id="quoteProduct" name="product" rows="4" required placeholder="Describe the product(s) you're looking for..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="quoteQuantity">Quantity Needed *</label>
+                    <input type="number" id="quoteQuantity" name="quantity" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="quoteMessage">Additional Message</label>
+                    <textarea id="quoteMessage" name="message" rows="3" placeholder="Any additional requirements or questions..."></textarea>
+                </div>
+                <button type="submit" class="btn-primary">Send Quote Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="contact-modal" style="display:none;">
+        <div class="contact-modal-content">
+            <button class="contact-modal-close" id="closePaymentModal" title="Close">&times;</button>
+            <h2>Complete Payment</h2>
+            <div id="paymentSummary" class="payment-summary">
+                <h3>Order Summary</h3>
+                <div id="orderItems"></div>
+                <div class="order-total">
+                    <strong>Total Amount: $<span id="orderTotal">0.00</span></strong>
+                </div>
+            </div>
+            <form id="paymentForm" class="quote-form">
+                <div class="form-group">
+                    <label for="paymentPhone">M-Pesa Phone Number *</label>
+                    <input type="tel" id="paymentPhone" name="phone" placeholder="0712345678" required>
+                    <small style="color: #666;">Enter your M-Pesa registered phone number</small>
+                </div>
+                <div class="payment-method">
+                    <label>Payment Method:</label>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/M-PESA_LOGO-01.svg" alt="M-Pesa" style="height: 30px;">
+                        <span>M-Pesa Buy Goods</span>
+                    </div>
+                    <div style="background: #f0f9ff; padding: 0.5rem; border-radius: 5px; margin-top: 0.5rem; font-size: 0.9rem;">
+                        <strong>Till Number: 3788280</strong><br>
+                        Store Number: 8231249
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary" id="payNowBtn">Pay Now</button>
+                <div id="paymentStatus" class="payment-status" style="display: none;">
+                    <p>Processing payment...</p>
+                    <div class="loading-spinner"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="contact-modal" style="display:none;">
+        <div class="contact-modal-content">
+            <button class="contact-modal-close" id="closeLoginModal" title="Close">&times;</button>
+            <h2>Login</h2>
+            <form id="loginForm" class="quote-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email *</label>
+                    <input type="email" id="loginEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password *</label>
+                    <input type="password" id="loginPassword" name="password" required>
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+                <p style="margin-top: 1rem; text-align: center;">
+                    Don't have an account? <a href="#" onclick="closeModal('login'); openModal('register');" style="color: #2563eb;">Register here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="contact-modal" style="display:none;">
+        <div class="contact-modal-content">
+            <button class="contact-modal-close" id="closeRegisterModal" title="Close">&times;</button>
+            <h2>Register</h2>
+            <form id="registerForm" class="quote-form">
+                <div class="form-group">
+                    <label for="registerUsername">Username *</label>
+                    <input type="text" id="registerUsername" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email *</label>
+                    <input type="email" id="registerEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password *</label>
+                    <input type="password" id="registerPassword" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerRole">Account Type</label>
+                    <select id="registerRole" name="role" onchange="toggleAdminPassword()">
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                </div>
+                <div class="form-group" id="adminPasswordGroup" style="display: none;">
+                    <label for="adminPassword">Admin Access Code *</label>
+                    <input type="password" id="adminPassword" name="adminPassword" placeholder="Enter admin access code">
+                    <small style="color: #666; font-size: 0.9em;">Required for admin registration</small>
+                </div>
+                <button type="submit" class="btn-primary">Register</button>
+                <p style="margin-top: 1rem; text-align: center;">
+                    Already have an account? <a href="#" onclick="closeModal('register'); openModal('login');" style="color: #2563eb;">Login here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Smart Supply Sourcing from China</h2>
+                <p>Connect with reliable suppliers and streamline your procurement process with our professional sourcing platform.</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="window.location.href='products.html'">Browse Products</button>
+                    <button class="btn-secondary" onclick="openModal('quote')">Request Quote</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="featured-products">
+        <div class="container">
+            <div class="section-header">
+                <h2>Featured Categories</h2>
+                <a href="products.html" class="view-all">View All Products</a>
+            </div>
+            <div class="products-grid" id="featuredProducts">
+                <!-- Products will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section">
+        <h1>About Smart Supply Sourcing China</h1>
+        <p class="lead">Your trusted partner for quality products from China with competitive pricing and reliable supply chain solutions.</p>
+        <ul>
+            <li>Direct connections with verified Chinese manufacturers</li>
+            <li>Quality assurance and inspection services</li>
+            <li>Competitive pricing and bulk order discounts</li>
+            <li>Reliable shipping and logistics support</li>
+            <li>Professional customer service and support</li>
+        </ul>
+        <div class="button-group">
+            <a href="#" class="btn-contact about-btn-blue" onclick="openModal('contact')">Contact Us</a>
+            <a href="products.html" class="btn-products about-btn-blue">View Products</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h3>Smart Supply Sourcing China</h3>
+                    <p>Your trusted partner for quality products from China with competitive pricing and reliable supply chain solutions.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Shenzhen, Guandong Province, China</li>
+                        <li><i class="fas fa-phone"></i> +8615012484113</li>
+                        <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/8615012484113" target="_blank" rel="noopener">WhatsApp</a></li>
+                        <li><i class="fab fa-tiktok"></i> <a href="https://www.tiktok.com/@sourcing_china_kenya?_t=ZM-8xmDvC4rMXA&_r=1" target="_blank" rel="noopener">@sourcing_china_kenya</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to our newsletter for the latest updates and offers.</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Your email" class="newsletter-input">
+                        <button class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; <span id="footerYear"></span> Smart Supply Sourcing China. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Live Chat Widget -->
+    <div id="liveChatWidget" class="live-chat-widget">
+        <div class="chat-toggle" id="chatToggle">
+            <i class="fas fa-comments"></i>
+        </div>
+        <div class="chat-window" id="chatWindow" style="display:none;">
+            <div class="chat-header">
+                <h4>Live Chat</h4>
+                <button class="chat-close" id="chatClose">&times;</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-message bot-message">
+                    <p>Hello! How can I help you with your sourcing needs today?</p>
+                </div>
+            </div>
+            <div class="chat-input-container">
+                <input type="text" id="chatInput" placeholder="Type your message..." class="chat-input">
+                <button class="chat-send" id="chatSend"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/8615012484113" class="whatsapp-float" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- JavaScript -->
+    <script src="js/custom.js"></script>
+    <script src="js/payment.js"></script>
+</body>
+</html>color: #666;">Enter your M-Pesa registered phone number</small>
+                </div>
+                <div class="payment-method">
+                    <label>Payment Method:</label>
+                    <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem;">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/15/M-PESA_LOGO-01.svg" alt="M-Pesa" style="height: 30px;">
+                        <span>M-Pesa</span>
+                    </div>
+                </div>
+                <button type="submit" class="btn-primary" id="payNowBtn">Pay Now</button>
+                <div id="paymentStatus" class="payment-status" style="display: none;">
+                    <p>Please check your phone for M-Pesa payment prompt...</p>
+                    <div class="loading-spinner"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="contact-modal" style="display:none;">
+        <div class="contact-modal-content">
+            <button class="contact-modal-close" id="closeLoginModal" title="Close">&times;</button>
+            <h2>Login</h2>
+            <form id="loginForm" class="quote-form">
+                <div class="form-group">
+                    <label for="loginEmail">Email *</label>
+                    <input type="email" id="loginEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password *</label>
+                    <input type="password" id="loginPassword" name="password" required>
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+                <p style="margin-top: 1rem; text-align: center;">
+                    Don't have an account? <a href="#" onclick="closeModal('login'); openModal('register');" style="color: #2563eb;">Register here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="contact-modal" style="display:none;">
+        <div class="contact-modal-content">
+            <button class="contact-modal-close" id="closeRegisterModal" title="Close">&times;</button>
+            <h2>Register</h2>
+            <form id="registerForm" class="quote-form">
+                <div class="form-group">
+                    <label for="registerUsername">Username *</label>
+                    <input type="text" id="registerUsername" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerEmail">Email *</label>
+                    <input type="email" id="registerEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Password *</label>
+                    <input type="password" id="registerPassword" name="password" required>
+                </div>
+                <div class="form-group">
+                <label for="registerRole">Account Type</label>
+                <select id="registerRole" name="role" onchange="toggleAdminPassword()">
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+                </select>
+                </div>
+                    <div class="form-group" id="adminPasswordGroup" style="display: none;">
+                        <label for="adminPassword">Admin Access Code *</label>
+                        <input type="password" id="adminPassword" name="adminPassword" placeholder="Enter admin access code">
+                        <small style="color: #666; font-size: 0.9em;">Required for admin registration</small>
+                    </div>
+                <button type="submit" class="btn-primary">Register</button>
+                <p style="margin-top: 1rem; text-align: center;">
+                    Already have an account? <a href="#" onclick="closeModal('register'); openModal('login');" style="color: #2563eb;">Login here</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <main style="min-height: 100vh; padding-bottom: 3rem;">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>Smart Supply Sourcing China</h2>
+                    <p>Quality products, competitive pricing, and reliable supply chain management</p>
+                    <div class="hero-buttons">
+                        <button class="btn-primary" onclick="window.location.href='products.html'">Browse Products</button>
+                        <button class="btn-secondary">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section class="featured-products">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Featured Products</h2>
+                    <a href="#" class="view-all">View All</a>
+                </div>
+                <div class="products-grid" id="featuredProducts">
+                    <!-- Products loaded via JavaScript -->
+                </div>
+            </div>
+        </section>
+        
+        <!-- About Us Section (Modern) -->
+        <section class="about-section">
+          <h1>About Us</h1>
+          <p class="lead">Your Bridge to Quality Sourcing in China</p>
+          <p>
+            Smart Supply Sourcing China is your trusted partner for seamless procurement and supply chain solutions.
+            Based in Shenzhen, we connect you directly with reputable Chinese factories,
+            ensuring you receive only the best products at competitive prices.
+          </p>
+          <ul>
+            <li>End-to-end sourcing for retail & wholesale</li>
+            <li>Personalized service & transparent communication</li>
+            <li>Air & sea shipping options tailored to your needs</li>
+            <li>Quality assurance & reliable delivery to Kenya</li>
+          </ul>
+          <div class="button-group">
+            <a href="tel:+8615012484113" class="btn-contact">Contact Our Team<br><span style='font-size:0.98em;font-weight:400;display:block;margin-top:4px;'>+8615012484113</span></a>
+            <a href="https://www.tiktok.com/@sourcing_china_kenya?_t=ZM-8xmDvC4rMXA&_r=1" class="btn-products" style="background:#2563eb;color:#fff;" target="_blank" rel="noopener">TikTok Page<br><span style='font-size:0.98em;font-weight:400;display:block;margin-top:4px;'>@sourcing_china_kenya</span></a>
+            <a href="products.html" class="btn-products" style="background:#2563eb;color:#fff;">Explore Products</a>
+          </div>
+        </section>
+        
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <h3>Smart Supply Sourcing China</h3>
+                    <p>Your trusted partner for quality products from China with competitive pricing and reliable supply chain solutions.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Shenzhen, Guandong Province, China</li>
+                        <li><i class="fas fa-phone"></i> +8615012484113</li>
+                        <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/8615012484113" target="_blank" rel="noopener">WhatsApp</a></li>
+                        <li><i class="fab fa-tiktok"></i> <a href="https://www.tiktok.com/@sourcing_china_kenya?_t=ZM-8xmDvC4rMXA&_r=1" target="_blank" rel="noopener">@sourcing_china_kenya</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to our newsletter for the latest updates and offers.</p>
+                    <div class="newsletter-form">
+                        <input type="email" placeholder="Your email" class="newsletter-input">
+                        <button class="newsletter-btn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; <span id="footerYear"></span> Smart Supply Sourcing China. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Live Chat Widget -->
+    <div id="liveChatWidget" class="live-chat-widget">
+        <div class="chat-toggle" id="chatToggle">
+            <i class="fas fa-comments"></i>
+        </div>
+        <div class="chat-window" id="chatWindow" style="display:none;">
+            <div class="chat-header">
+                <h4>Live Chat</h4>
+                <button class="chat-close" id="chatClose">&times;</button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="chat-message bot-message">
+                    <p>Hello! How can I help you with your sourcing needs today?</p>
+                </div>
+            </div>
+            <div class="chat-input-container">
+                <input type="text" id="chatInput" placeholder="Type your message..." class="chat-input">
+                <button class="chat-send" id="chatSend"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/8615012484113" class="whatsapp-float" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="js/scripts.js"></script>
+    <script src="js/custom.js"></script>
+</body>
+</html>
+
